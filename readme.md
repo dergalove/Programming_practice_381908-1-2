@@ -19,7 +19,7 @@
 
 Распределение задач можно найти здесь: [таблица](https://docs.google.com/spreadsheets/d/1KRfV4ydr0sxQcUaSl-PW_Vm9AKXQ5_1kCoj6ITggR5Q/edit#gid=1488127654)
 
-Постановки заданий: задачи
+Постановки заданий: [задачи](https://github.com/SemyonBevzuk/Programming_practice_381908-1-2/tree/master/Tasks)
 
 ## Работа с Git
 ### Настройка Git
