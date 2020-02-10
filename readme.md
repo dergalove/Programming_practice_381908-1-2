@@ -111,19 +111,21 @@
 
 ### Получение изменений
 Для получения последних изменений из своего репозитория и слияния их в текущую ветку можно воспользоваться командой
-    ```bash
-        git pull
-    ```
+```bash
+    git pull
+```
+
 Если вы хотите просто скачать изменения для сохранения их локально без слияния, то используйте  
-    ```bash
-        git fetch 
-    ```
+```bash
+    git fetch 
+```
+
 Перед началом работы над следующим заданием полезно синхронизироваться с upstream-репозиторием.
-    ```bash
-        git remote add upstream https://github.com/SemyonBevzuk/Programming_practice_381908-1-2
-        git fetch upstream
-        git checkout -b ваша_ветка
-    ```
+```bash
+    git remote add upstream https://github.com/SemyonBevzuk/Programming_practice_381908-1-2
+    git fetch upstream
+    git checkout -b ваша_ветка
+```
 
 ## Ссылки про работу с Git
 Информации про Git много, можно найти решение почти любой проблемы.
