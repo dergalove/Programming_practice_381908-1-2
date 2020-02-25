@@ -1,64 +1,75 @@
 #include "Rational.h"
 
-Rational operator+(Rational& a, Rational& b)
+Rational Rational::operator+(Rational& a)
 {
 	Rational res;
-	res.n = a.n + b.n;
-	if (a.m + b.m != 0) res.m = a.m + b.m;
-	simplify(res);
+	res.n += a.n;
+	//if (a.m + res.m == 0) всё плохо, вырубай; else
+	res.m += a.m;
+	res.simplify();
 	return res;
 }
-Rational operator-(Rational& a, Rational& b)
+Rational Rational::operator-(Rational& a)
 {
 	Rational res;
-	res.n = a.n - b.n;
-	res.m = a.m - b.m;
-	simplify(res);
+	res.n -= a.n;
+	//if (a.m - res.m == 0) всё плохо, вырубай; else
+	res.m -= a.m;
+	res.simplify();
 	return res;
 }
-Rational operator*(Rational& a, Rational& b)
+Rational Rational::operator*(Rational& a)
 {
 	Rational res;
-	res.n = a.n * b.n;
-	res.m = a.m * b.m;
-	simplify(res);
+	res.n *= a.n;
+	//if (a.m == 0 || res.m == 0) всё плохо, вырубай; else
+	res.m *= a.m;
+	res.simplify();
 	return res;
 }
-Rational operator/(Rational& a, Rational& b)
+Rational Rational::operator/(Rational& a)
 {
 	Rational res;
-	res.n = a.n / b.n;
-	res.m = a.m / b.m;
-	simplify(res);
+	res.n /= a.n;
+	//if (a.m == 0 || res.m == 0) всё плохо, вырубай; else
+	res.m /= a.m;
+	//simplify(res);
+	res.simplify();
 	return res;
 }
 
-Rational simplify(Rational& a)
+void Rational::simplify()
 {
-	int nod = NOD(a.n, a.m);
-	a.n /= nod;
-	a.m /= nod;
-	if (a.n < 0 && a.m < 0 || a.n>0 && a.m < 0)
+	int nod = NOD(n, m);
+	n /= nod;
+	m /= nod;
+	if (m < 0)
 	{
-		a.n *= -1;
-		a.m *= -1;
+		n *= -1;
+		m *= -1;
 	}
-	return *this;
 };
-Rational inicialize(int a, int b)
+
+Rational &Rational::operator=(Rational& a)
 {
-	Rational res;
-	res.n = a;
-	res.m = b;
-	simplify(res);
+	n = a.n;
+	m = a.m;
+	simplify();
+	return *this;
+}
+
+bool Rational::operator==(const Rational& a)
+{
+	bool res;
+	res = (n == a.n && m == a.m);
 	return res;
 }
-void sravn(Rational& a, Rational& b)
+
+bool Rational::operator!=(const Rational& a)
 {
-	if ((a.n == b.n) && (a.m == b.m))
-		cout << "A is equal to B" << endl;
-	else
-		cout << "A is not equal to B" << endl;
+	bool res;
+	res = !(n == a.n && m == a.m);
+	return res;
 }
 
 void input()

@@ -1,11 +1,5 @@
 #pragma once
-/* Разработать класс Rational(рациональное число).
-
-Класс должен хранить корректные дроби n / m(знаменатель не равен 0).
-
-Дробь должна храниться в несократимом виде.
-
-Класс должен содержать все необходимые конструкторы и деструктор.
+/* Класс должен содержать все необходимые конструкторы и деструктор.
 
 В классе должны быть перегружены операции:
 присваивания
@@ -25,23 +19,25 @@ int NOD(int n, int m)
 
 class Rational {
 
-private:
+public:
 	int n, m;
 
-public:
-	Rational plus(Rational& a, Rational& b);
+	Rational operator+(Rational& a);
 
-	Rational minus(Rational& a, Rational& b); 
+	Rational operator-(Rational& a); 
 
-	Rational mult(Rational& a, Rational& b);
+	Rational operator*(Rational& a);
 
-	Rational div(Rational& a, Rational& b);
+	Rational operator/(Rational& a);
 
-	Rational simplify(Rational a);
+	void simplify();
 
-	Rational inicialize(int a, int b);
+	Rational& operator=(Rational& a);
 
-	void sravn(Rational& a, Rational& b);
+	bool operator==(const Rational& a);
+
+	bool operator!=(const Rational& a);
+
 
 	void input();
 
