@@ -10,17 +10,34 @@
 #include <iostream>
 using namespace std;
 
-int NOD(int n, int m)
+int NOD(int a, int b)
 {
-	while (n != 0 && m != 0)
-		if (n > m) n %= m; else n %= m;
-	return n + m;
+	while (a != b)
+	{
+		if (a > b)
+			a -= b;
+		else
+			b -= a;
+	}
+	return a;
 }
 
 class Rational {
+private:
+
+	int n, m;
 
 public:
-	int n, m;
+
+	Rational();
+
+	Rational(int a, int b);
+
+	Rational(int x);
+
+	Rational(const Rational& b);
+
+	~Rational();
 
 	Rational operator+(Rational& a);
 
@@ -38,8 +55,11 @@ public:
 
 	bool operator!=(const Rational& a);
 
+	bool operator>(const Rational & a);
 
-	void input();
+	bool operator<(const Rational & a);
 
-	void output(Rational& a);
+	friend istream& operator>>(istream&, Rational&);
+
+	friend ostream& operator<<(ostream&, const Rational&);
 };

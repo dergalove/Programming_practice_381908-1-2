@@ -1,10 +1,36 @@
 #include "Rational.h"
 
+Rational::Rational()
+{
+	n = 0; m = 1;
+}
+
+Rational::Rational(int a, int b)
+{
+	if (b == 0) return;
+	n = a; m = b;
+	simplify();
+}
+
+Rational::Rational(int x)
+{
+	n = x; m = 1;
+}
+
+Rational::Rational(const Rational& b)
+{
+	n = b.n;
+	m = b.m;
+}
+
+Rational::~Rational()
+{
+}
+
 Rational Rational::operator+(Rational& a)
 {
 	Rational res;
 	res.n += a.n;
-	//if (a.m + res.m == 0) всё плохо, вырубай; else
 	res.m += a.m;
 	res.simplify();
 	return res;
@@ -13,7 +39,6 @@ Rational Rational::operator-(Rational& a)
 {
 	Rational res;
 	res.n -= a.n;
-	//if (a.m - res.m == 0) всё плохо, вырубай; else
 	res.m -= a.m;
 	res.simplify();
 	return res;
@@ -22,7 +47,6 @@ Rational Rational::operator*(Rational& a)
 {
 	Rational res;
 	res.n *= a.n;
-	//if (a.m == 0 || res.m == 0) всё плохо, вырубай; else
 	res.m *= a.m;
 	res.simplify();
 	return res;
@@ -31,23 +55,22 @@ Rational Rational::operator/(Rational& a)
 {
 	Rational res;
 	res.n /= a.n;
-	//if (a.m == 0 || res.m == 0) всё плохо, вырубай; else
 	res.m /= a.m;
-	//simplify(res);
 	res.simplify();
 	return res;
 }
 
 void Rational::simplify()
 {
-	int nod = NOD(n, m);
-	n /= nod;
-	m /= nod;
+	if (m == 0) return;
 	if (m < 0)
 	{
 		n *= -1;
 		m *= -1;
 	}
+	int nod = NOD(n, m);
+	n /= nod;
+	m /= nod;
 };
 
 Rational &Rational::operator=(Rational& a)
@@ -72,14 +95,27 @@ bool Rational::operator!=(const Rational& a)
 	return res;
 }
 
-void input()
+bool Rational::operator>(const Rational & a)
 {
-	Rational res;
-	cout << "Enter numerator and denominator:" << endl;
-	cin >> res.n >> res.m;
+	return n * a.m > a.n * m;
 }
 
-void output(Rational& a)
+bool Rational::operator<(const Rational & a)
 {
-	cout << a.n << "/" << a.m << endl;
+	return n * a.m < a.n * m;
+}
+
+istream & operator>>(istream & in, Rational & a)
+{
+	int n, m;
+	cin >> n >> m;
+	Rational res(n, m);
+	a = res;
+	return in;
+}
+
+ostream & operator<<(ostream & out, const Rational & a)
+{
+	out << a.n << "/" << a.m << endl;
+	return out;
 }
