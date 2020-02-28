@@ -1,5 +1,6 @@
 #include "Rational.h"
 
+
 Rational::Rational()
 {
 	n = 0; m = 1;
@@ -30,34 +31,52 @@ Rational::~Rational()
 Rational Rational::operator+(Rational& a)
 {
 	Rational res;
-	res.n += a.n;
-	res.m += a.m;
-	res.simplify();
+	int tmp_m = m;
+	if (m != a.m)
+	{
+		n *= a.m;
+		m *= a.m;
+		a.n *= tmp_m;
+		a.m *= tmp_m;
+	}
+	res.n = n + a.n;
+	res.m = m;
+	a.m /= tmp_m;
+	a.n /= tmp_m;
+	simplify();
 	return res;
 }
 Rational Rational::operator-(Rational& a)
 {
 	Rational res;
-	res.n -= a.n;
-	res.m -= a.m;
-	res.simplify();
+	int tmp_m = m;
+	if (m != a.m)
+	{
+		n *= a.m;
+		m *= a.m;
+		a.n *= tmp_m;
+		a.m *= tmp_m;
+	}
+	res.n = n - a.n;
+	res.m = m;
+	a.m /= tmp_m;
+	a.n /= tmp_m;
+	simplify();
 	return res;
 }
 Rational Rational::operator*(Rational& a)
 {
-	Rational res;
-	res.n *= a.n;
-	res.m *= a.m;
-	res.simplify();
-	return res;
+	n *= a.n;
+	m *= a.m;
+	simplify();
+	return *this;
 }
 Rational Rational::operator/(Rational& a)
 {
-	Rational res;
-	res.n /= a.n;
-	res.m /= a.m;
-	res.simplify();
-	return res;
+	n /= a.n;
+	m /= a.m;
+	simplify();
+	return *this;
 }
 
 void Rational::simplify()
@@ -119,3 +138,4 @@ ostream & operator<<(ostream & out, const Rational & a)
 	out << a.n << "/" << a.m << endl;
 	return out;
 }
+
