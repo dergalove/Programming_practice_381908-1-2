@@ -6,19 +6,7 @@ class Rational {
 private:
 
 	int n, m;
-	int NOD(int a, int b)
-	{
-		if (a < 0)
-			a *= -1;
-		while (a != b)
-		{
-			if (a > b)
-				a -= b;
-			else
-				b -= a;
-		}
-		return a;
-	}
+	int NOD(int a, int b);
 
 public:
 
@@ -32,9 +20,9 @@ public:
 
 	~Rational();
 
-	Rational operator+(Rational& a);
+	Rational operator+(Rational& a) const;
 
-	Rational operator-(Rational& a); 
+	Rational operator-(Rational& a) const; 
 
 	Rational operator*(Rational& a);
 

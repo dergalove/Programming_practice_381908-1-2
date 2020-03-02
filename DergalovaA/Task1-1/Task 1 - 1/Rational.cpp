@@ -1,5 +1,18 @@
 #include "Rational.h"
 
+int Rational::NOD(int a, int b)
+{
+	if (a < 0)
+		a *= -1;
+	while (a != b)
+	{
+		if (a > b)
+			a -= b;
+		else
+			b -= a;
+	}
+	return a;
+}
 
 Rational::Rational()
 {
@@ -8,7 +21,7 @@ Rational::Rational()
 
 Rational::Rational(int a, int b)
 {
-	if (b == 0) return;
+	if (b == 0) throw "Нельзя делить на ноль.\n";
 	n = a; m = b;
 	simplify();
 }
@@ -28,43 +41,23 @@ Rational::~Rational()
 {
 }
 
-Rational Rational::operator+(Rational& a)
+Rational Rational::operator+(Rational& a) const
 {
 	Rational res;
-	int tmp_m = m;
-	if (m != a.m)
-	{
-		n *= a.m;
-		m *= a.m;
-		a.n *= tmp_m;
-		a.m *= tmp_m;
-	}
-	res.n = n + a.n;
-	res.m = m;
-	a.m /= tmp_m;
-	a.n /= tmp_m;
-	simplify();
+	res.n = n*a.m + a.n*m;
+	res.m = m * a.m;
+	res.simplify();
 	return res;
 }
-Rational Rational::operator-(Rational& a)
+Rational Rational::operator-(Rational& a)  const
 {
 	Rational res;
-	int tmp_m = m;
-	if (m != a.m)
-	{
-		n *= a.m;
-		m *= a.m;
-		a.n *= tmp_m;
-		a.m *= tmp_m;
-	}
-	res.n = n - a.n;
-	res.m = m;
-	a.m /= tmp_m;
-	a.n /= tmp_m;
-	simplify();
+	res.n = n * a.m - a.n*m;
+	res.m = m * a.m;
+	res.simplify();
 	return res;
 }
-Rational Rational::operator*(Rational& a)
+Rational Rational::operator*(Rational& a) 
 {
 	n *= a.n;
 	m *= a.m;
@@ -102,16 +95,12 @@ Rational &Rational::operator=(Rational& a)
 
 bool Rational::operator==(const Rational& a)
 {
-	bool res;
-	res = (n == a.n && m == a.m);
-	return res;
+	return (n == a.n && m == a.m);
 }
 
 bool Rational::operator!=(const Rational& a)
 {
-	bool res;
-	res = !(n == a.n && m == a.m);
-	return res;
+	return !(*this == a);
 }
 
 bool Rational::operator>(const Rational & a)
