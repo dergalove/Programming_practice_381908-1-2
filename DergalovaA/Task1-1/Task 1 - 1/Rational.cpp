@@ -21,9 +21,28 @@ Rational::Rational()
 
 Rational::Rational(int a, int b)
 {
-	if (b == 0) throw "Нельзя делить на ноль.\n";
+	/*try
+	{
+	if (b == 0)
+		throw "Division to 0!";
+	}
+	catch (int b)
+	{
+		cout << "Division to 0!" << endl;
+	}
+	n = a; m = b;
+	simplify(); */
+	try
+	{
+		if (b == 0)
+			throw 0;
 	n = a; m = b;
 	simplify();
+	}
+	catch (int b)
+	{
+		cout << "Division to 0!" << endl;
+	}
 }
 
 Rational::Rational(int x)
