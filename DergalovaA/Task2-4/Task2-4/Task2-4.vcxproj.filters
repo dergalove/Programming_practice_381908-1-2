@@ -15,16 +15,16 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\..\..\Desktop\Programming_practice_381908-1-2\DergalovaA\Task1-1\Task 1 - 1\main.cpp">
-      <Filter>Файлы ресурсов</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\..\Desktop\Programming_practice_381908-1-2\DergalovaA\Task1-1\Task 1 - 1\Octal.cpp">
-      <Filter>Файлы ресурсов</Filter>
-    </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="..\..\..\..\..\Desktop\Programming_practice_381908-1-2\DergalovaA\Task1-1\Task 1 - 1\Octal.h">
+    <ClInclude Include="Octal.h">
       <Filter>Файлы ресурсов</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>Файлы ресурсов</Filter>
+    </ClCompile>
+    <ClCompile Include="Octal.cpp">
+      <Filter>Файлы ресурсов</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
