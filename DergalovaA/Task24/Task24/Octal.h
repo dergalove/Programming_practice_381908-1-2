@@ -9,13 +9,12 @@ using namespace std;
 class Octal {
 private:
 
-	int n;
+	unsigned char* n ;
+	int size;
 
 public:
 
 	Octal();
-
-	//Octal(char* in);
 
 	Octal(int in);
 
@@ -23,9 +22,9 @@ public:
 
 	~Octal();
 
-	Octal operator+(const Octal& c);
+	Octal &operator+(const Octal& c);
 
-	Octal operator-(const Octal& c);
+	Octal &operator-(const Octal& c);
 
 	Octal &operator=(Octal& a);
 
@@ -42,6 +41,4 @@ public:
 	friend istream& operator>>(istream&, Octal&);
 
 	friend ostream& operator<<(ostream&, const Octal&);
-
-  //friend int operator>>();
 };

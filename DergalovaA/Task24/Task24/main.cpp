@@ -11,7 +11,7 @@ int main()
 
 	Octal A, B(143), C, D(B), E, F;
 	A = 34;
-	E = A+B;
+	E = A + B;
 	if (A > B)
 	{
 		C = A - B;
