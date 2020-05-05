@@ -3,13 +3,14 @@
 
 Octal::Octal()
 {
-	size = 1;
-	n[0] = 0;
+	size = 0;
+	n = new unsigned char[5];
 }
 
 Octal::Octal(int in)
 {
-	size = 1;
+	size = 0;
+	n = new unsigned char[5];
 	int i = 0;
 	int in2 = in;
 	while (in2 > 0)
@@ -20,7 +21,8 @@ Octal::Octal(int in)
 	}
 	while (i > 0)
 	{
-		n[i] = in % 10;
+		int a = in % 10;
+		n[i] = a;
 		in /= 10;
 		i--;
 		size++;
@@ -29,6 +31,7 @@ Octal::Octal(int in)
 
 Octal::Octal (Octal& in)
 {
+	n = new unsigned char[5];
 	int i = size = in.size;
 	while (i > 0)
 	{
@@ -40,6 +43,7 @@ Octal::Octal (Octal& in)
 
 Octal::~Octal()
 {
+	delete[] n;
 }
 
 Octal &Octal::operator+(const Octal& c)

@@ -9,7 +9,7 @@ using namespace std;
 class Octal {
 private:
 
-	unsigned char* n ;
+	unsigned char* n;
 	int size;
 
 public:
