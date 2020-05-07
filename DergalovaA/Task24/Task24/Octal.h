@@ -11,6 +11,8 @@ private:
 
 	unsigned char* n;
 	int size;
+	void addR();
+	void cutR();
 
 public:
 
@@ -18,15 +20,15 @@ public:
 
 	Octal(int in);
 
-	Octal(Octal& in);
+	Octal(const Octal& in);
 
 	~Octal();
 
-	Octal &operator+(const Octal& c);
+	Octal operator+(const Octal& c);
 
-	Octal &operator-(const Octal& c);
+	Octal operator-(const Octal& c);
 
-	Octal &operator=(Octal& a);
+	Octal &operator=(const Octal& a);
 
 	Octal &operator=(int a);
 
