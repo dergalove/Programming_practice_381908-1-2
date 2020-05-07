@@ -14,7 +14,7 @@ int main()
 	A = 34;
 	E = A + B;
 	C = B - A;
-	cout << "A = " << A << "B = " << B << "C = |F - B| = " << C << "D = " << D << "E = " << E << "F = " << F;
+	cout << "A = " << A << "B = " << B << "C = B - A = " << C << "D = " << D << "E = " << E << "F = " << F;
 	cout << "D == B ? " << (D == B) << endl << "E != B ? " << (E != B) << endl;
 	cout << "F > A ? " << (F > A) << endl << "F < E ? " << (F < E) << endl;
 	system("pause");

@@ -3,24 +3,40 @@
 
 void Octal::addR()
 { //i is the highest razryad
-	int i = 0;
 	size++;
-	for (int j = size - 1; j > 0; j--)
-		n[j + 1] = n[j];
-	n[i] = 1;
+	unsigned char* n2 = new unsigned char[size];
+	//sdvig
+	for (size_t j = 0; j > size-1; j++)
+		n2[j + 1] = n[j];
+	//n2[0] is empty, cause there is new razryad
+	delete[] n;
+	n = new unsigned char[size];
+	for (size_t i = 1; i < size; i++)
+		n[i] = n2[i];
+	delete[] n2;
+	n[0] = 1; //new razryad
 }
 
 void Octal::cutR()
 { //the highest razryad is equal to 0
 	size--;
-	for (int j = 0; j > size-1; j++)
-		n[j] = n[j+1];
+	unsigned char* n2 = new unsigned char[size];
+	//sdvig
+	for (size_t j = 0; j > size-1; j++)
+		n2[j] = n[j + 1];
+	delete[] n;
+	n = new unsigned char[size];
+	for (size_t i = 0; i < size; i++)
+		n[i] = n2[i];
+	delete[] n2;
+
+	
 }
 
 Octal::Octal()
 {
 	size = 0;
-	n = NULL;
+	n = nullptr;
 }
 
 Octal::Octal(int in)
@@ -36,19 +52,19 @@ Octal::Octal(int in)
 	size = i;
 	n = new unsigned char[size];
 	i--;
-	for(; i >= 0; i--)
+	for (; i >= 0; i--)
 	{
 		int a = in % 10;
 		n[i] = a;
 		in /= 10;
-    }
+	}
 }
 
-Octal::Octal (const Octal& in)
+Octal::Octal(const Octal& in)
 {
 	size = in.size;
 	n = new unsigned char[size];
-	for (int i = 0; i < size; i++)
+	for (size_t i = 0; i < size; i++)
 	{
 		n[i] = in.n[i];
 	}
@@ -58,7 +74,7 @@ Octal::Octal (const Octal& in)
 Octal::~Octal()
 {
 	if (n)
-	delete[] n;
+		delete[] n;
 }
 
 Octal Octal::operator+(const Octal& b)
@@ -77,14 +93,14 @@ Octal Octal::operator+(const Octal& b)
 	int d = a.size - c.size;
 	res.n = new unsigned char[i];
 	i--;
-	for(; i>=0; i--)
+	for (; i >= 0; i--)
 	{
 		int k;
 		if (i < d)
 			k = a.n[i];
-		else 
-			k = a.n[i] + c.n[i-d];
-		
+		else
+			k = a.n[i] + c.n[i - d];
+
 		if (k > 7 && k < 15)
 		{
 			k -= 8;
@@ -97,9 +113,10 @@ Octal Octal::operator+(const Octal& b)
 					res.addR();
 			}
 		}
+
 		res.n[i] = k;
 	}
-  return res;
+	return res;
 }
 
 Octal Octal::operator-(const Octal& b)
@@ -145,18 +162,18 @@ Octal Octal::operator-(const Octal& b)
 
 Octal &Octal::operator=(const Octal& a)
 {
-	int i = size = a.size;
+	if (*this == a)
+			return *this; //if this == a, there is no smysl to work
+	delete[] n;
+	size = a.size;
 	n = new unsigned char[size];
-	for (; i >= 0; i--)
-	{
+	for (size_t i = 0; i < size; i++)
 		n[i] = a.n[i];
-	}
-  return *this;
+	return *this;
 }
 
 Octal &Octal::operator=(int a)
 {
-	size = 1;
 	int i = 0;
 	int a2 = a;
 	while (a2 > 0)
@@ -168,7 +185,7 @@ Octal &Octal::operator=(int a)
 	size = i;
 	n = new unsigned char[i];
 	i--;
-	for (; i>=0; i--)
+	for (; i >= 0; i--)
 	{
 		n[i] = a % 10;
 		a /= 10;
@@ -178,17 +195,17 @@ Octal &Octal::operator=(int a)
 
 bool Octal::operator==(const Octal& a)
 {
-	int flag = 0;
-	if (size = a.size)
+	bool f = false;
+	if (size == a.size)
 	{
 		int i = size;
-		while (n[i] == a.n[i] && i>0)
+		while (n[i] == a.n[i] && i > 0)
 		{
 			i--;
 		}
-		if (i == 0) flag = 1;
+		if (i == 0) f = true;
 	}
-	return (flag);
+	return (f);
 }
 
 bool Octal::operator!=(const Octal& a)
@@ -198,62 +215,62 @@ bool Octal::operator!=(const Octal& a)
 
 bool Octal::operator>(const Octal & a)
 {
-	int flag = 0;
+	bool f = false;
 	if (size > a.size)
-		flag = 1;
+		f = true;
 	else
-		if (size = a.size)
-	{
-		int i = size;
-		while (n[i] > a.n[i] && i > 0)
+		if (size == a.size)
 		{
-			i--;
+			int i = size;
+			while (n[i] > a.n[i] && i > 0)
+			{
+				i--;
+			}
+			if (i == 0) f = true;
 		}
-		if (i == 0) flag = 1;
-	}
-	return (flag);
+	return (f);
 }
 
 bool Octal::operator<(const Octal & a)
 {
-	int flag = 0;
+	bool f = false;
 	if (size < a.size)
-		flag = 1;
+		f = true;
 	else
-		if (size = a.size)
+		if (size == a.size)
 		{
 			int i = size;
 			while (n[i] < a.n[i] && i > 0)
 			{
 				i--;
 			}
-			if (i != 0) flag = 1;
+			if (i != 0) f = true;
 		}
-	return (flag);
+	return (f);
 }
 
 istream & operator>>(istream & in, Octal & a)
 {
 	int s;
-	cin >> s;
+	in >> s;
+	delete[] a.n;
 	a.size = s;
 	a.n = new unsigned char[a.size];
 	for (int i = 0; i < s; i++)
 	{
-		unsigned char k ;
-		cin >> k;
+		unsigned char k;
+		in >> k;
 		a.n[i] = k - '0';
-	 }
-		  return in;
+	}
+	return in;
 }
 
 ostream & operator<<(ostream & out, const Octal & a)
 {
-	out << a.size << " ";
-	for (int i = 0; i < a.size - 1; i++) {
-		out << (int)a.n[i] << ".";
+	out << "[" << a.size << "] ";
+	for (size_t i = 0; i < a.size; i++) {
+		out << (int)a.n[i];
 	}
-	out << (int)a.n[a.size - 1];
 	out << endl;
 	return out;
 }

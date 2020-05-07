@@ -10,7 +10,7 @@ class Octal {
 private:
 
 	unsigned char* n;
-	int size;
+	size_t size;
 	void addR();
 	void cutR();
 
