@@ -5,7 +5,7 @@ using namespace std;
 
 int main()
 {
-	Rational a(3), b(4,8), c(-1), d, e;
+	Rational a(3), b(4, 8), c(-1), d, e;
 	cout << "Initial values: a = 3; b = 4/8; c = -1, d and e are not set." << endl;
 	d = a + b;
 	cout << "Assign d the sum of a and b: " << endl;

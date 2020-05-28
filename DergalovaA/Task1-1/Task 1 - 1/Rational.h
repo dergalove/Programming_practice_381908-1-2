@@ -22,7 +22,7 @@ public:
 
 	Rational operator+(Rational& a) const;
 
-	Rational operator-(Rational& a) const; 
+	Rational operator-(Rational& a) const;
 
 	Rational operator*(Rational& a);
 

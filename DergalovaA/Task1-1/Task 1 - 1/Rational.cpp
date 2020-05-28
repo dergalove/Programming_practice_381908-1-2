@@ -36,8 +36,8 @@ Rational::Rational(int a, int b)
 	{
 		if (b == 0)
 			throw 0;
-	n = a; m = b;
-	simplify();
+		n = a; m = b;
+		simplify();
 	}
 	catch (int b)
 	{
@@ -64,7 +64,7 @@ Rational::~Rational()
 Rational Rational::operator+(Rational& a) const
 {
 	Rational res;
-	res.n = n*a.m + a.n*m;
+	res.n = n * a.m + a.n*m;
 	res.m = m * a.m;
 	res.simplify();
 	return res;
@@ -77,7 +77,7 @@ Rational Rational::operator-(Rational& a)  const
 	res.simplify();
 	return res;
 }
-Rational Rational::operator*(Rational& a) 
+Rational Rational::operator*(Rational& a)
 {
 	n *= a.n;
 	m *= a.m;
@@ -147,4 +147,3 @@ ostream & operator<<(ostream & out, const Rational & a)
 	out << a.n << "/" << a.m << endl;
 	return out;
 }
-
